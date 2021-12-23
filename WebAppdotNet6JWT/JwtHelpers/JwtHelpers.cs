@@ -30,8 +30,10 @@ namespace WebAppdotNet6JWT.JwtHelpers
                 var UserToken = new UserTokens();
                 if (model == null) throw new ArgumentException(nameof(model));
                 // Get secret key
+                //GetClaims（）メソッドを使用して、ユーザートークンの詳細から返品クレームリストを作成します。
                 var key = System.Text.Encoding.ASCII.GetBytes(jwtSettings.IssuerSigningKey);
                 Guid Id = Guid.Empty;
+                //appsettingsで指定されたキーのバイト配列を取得します。ここでは、トークンの有効期限を、トークンが生成された日から1日として定義します。
                 DateTime expireTime = DateTime.UtcNow.AddDays(1);
                 UserToken.Validaty = expireTime.TimeOfDay;
                 var JWToken = new JwtSecurityToken(issuer: jwtSettings.ValidIssuer, audience: jwtSettings.ValidAudience, claims: GetClaims(model, out Id), notBefore: new DateTimeOffset(DateTime.Now).DateTime, expires: new DateTimeOffset(expireTime).DateTime, signingCredentials: new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256));

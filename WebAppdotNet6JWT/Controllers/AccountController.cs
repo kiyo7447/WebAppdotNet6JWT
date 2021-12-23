@@ -43,7 +43,7 @@ namespace WebAppdotNet6JWT.Controllers
                     }, jwtSettings);
                 }
                 else {
-                    return BadRequest($"wrong password");
+                    return BadRequest($"ユーザ名もしくは、パスワードが間違っています。");
                 }
                 return Ok(Token);
             }
