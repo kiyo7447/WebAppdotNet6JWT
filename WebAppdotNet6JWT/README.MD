@@ -17,7 +17,6 @@ Download
   "expiredTime": "0001-01-01T00:00:00"
 }
 ```
-<a> </a>
 ![成功のサンプル](./Docs/成功のレスポンス.png "成功のサンプル")
 ![失敗のサンプル](./Docs/失敗のレスポンス.png "失敗のサンプルだ")
 
@@ -72,3 +71,14 @@ sec-fetch-dest: empty
    //正しい
   public static void AddJWTTokenServices(this IServiceCollection Services, IConfiguration Configuration)
 ```
+## RefreshTokenの対応が必要
+あれ？返っていない？
+## GetListの対応が必要（Tokenを使用して動作する）
+![トークンを入力前](./Docs/トークンを入力前.png "トークンを入力前")
+![トークンを入力後](./Docs/トークンを入力後.png "トークンを入力後")
+
+![トークンを使用してアカウントリストを取得](./Docs/トークンを使用してアカウントリストを取得.png "トークンを使用してアカウントリストを取得")
+
+## 自動テストのコードが無い。
+後日対応かな。
+
