@@ -1,8 +1,29 @@
 ﻿# 
 [参考サイト](https://www.c-sharpcorner.com/article/jwt-token-authentication-and-authorizations-in-net-core-6-0-web-api/)
 
+# 成功
+```Text
+HTTP Status 200	
+Response body
+Download
+{
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6ImVkNDhiNjM5LTU4NmQtNDY1Zi04OWZmLWE5MTVjZTRiYWY0ZiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWUiOiJBZG1pbiIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL2VtYWlsYWRkcmVzcyI6ImFkbWluYWtwQGdtYWlsLmNvbSIsImh0dHA6Ly9zY2hlbWFzLnhtbHNvYXAub3JnL3dzLzIwMDUvMDUvaWRlbnRpdHkvY2xhaW1zL25hbWVpZGVudGlmaWVyIjoiNWE1ZGI2OGMtMDU0MC00OThmLThhYjktOWZiNWY1M2FhODIwIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9leHBpcmF0aW9uIjoiMTLmnIgg6YeRIDI0IDIwMjEgMTM6NDQ6NDMg5Y2I5b6MIiwibmJmIjoxNjQwMjY3MDgzLCJleHAiOjE2NDAzMjEwODMsImlzcyI6Imh0dHBzOi8vbG9jYWxob3N0OjcxODgiLCJhdWQiOiJodHRwczovL2xvY2FsaG9zdDo3MTg4In0.EXIvsPWsn9q7Bx5EHKJrVeJK_24KMcjMHDLAf1XQdnQ",
+  "userName": "Admin",
+  "validaty": "13:44:43.2260988",
+  "refreshToken": null,
+  "id": "ed48b639-586d-465f-89ff-a915ce4baf4f",
+  "emailId": null,
+  "guidId": "5a5db68c-0540-498f-8ab9-9fb5f53aa820",
+  "expiredTime": "0001-01-01T00:00:00"
+}
+```
+<a> </a>
+![成功のサンプル](./Docs/成功のレスポンス.png "成功のサンプル")
+![失敗のサンプル](./Docs/失敗のレスポンス.png "失敗のサンプルだ")
+
+
 # エラー集
-## 最初の実装エラー
+## 最初の実装エラー(Extentionsの実装ミス)
 ```
 System.InvalidOperationException: Unable to resolve service for type 'WebAppdotNet6JWT.Models.JwtSettings' while attempting to activate 'WebAppdotNet6JWT.Controllers.AccountController'.
    at Microsoft.Extensions.DependencyInjection.ActivatorUtilities.GetService(IServiceProvider sp, Type type, Type requiredBy, Boolean isDefaultParameterRequired)
@@ -40,4 +61,14 @@ sec-ch-ua-platform: "Windows"
 sec-fetch-site: same-origin
 sec-fetch-mode: cors
 sec-fetch-dest: empty
+```
+原因は、Extensionのスペルミス
+```C#
+   //間違い
+   public static void AddJWTTokenServices(IServiceCollection Services, IConfiguration Configuration) {
+
+```
+```C#
+   //正しい
+  public static void AddJWTTokenServices(this IServiceCollection Services, IConfiguration Configuration)
 ```
